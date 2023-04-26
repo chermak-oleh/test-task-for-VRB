@@ -1,27 +1,25 @@
 import React from 'react';
-import './App.scss';
+import { Route, Routes } from 'react-router';
+import { NavBar } from './components/NavBar/NavBar';
+import { MyArticlesPage } from './pages/MyArticlesPage';
+import { NewsapiPage } from './pages/NewsapiPage';
+import { AddArticleForm } from './components/AddArticleForm';
 
-interface Props {
-  onClick: () => void;
-}
-
-export const Provider: React.FC<Props> = React.memo(
-  ({ onClick, children }) => (
-    <button
-      type="button"
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  ),
-);
-
-export const App: React.FC = () => {
+const App: React.FC = () => {
   return (
-    <div className="starter">
-      <Provider onClick={() => ({})}>
-        <TodoList />
-      </Provider>
-    </div>
+    <>
+      <NavBar />
+      <section className="section">
+        <div className="container mt-5">
+          <Routes>
+            <Route path="/" element={<MyArticlesPage />} />
+            <Route path="/addarticle" element={<AddArticleForm />} />
+            <Route path="/newsapi" element={<NewsapiPage />} />
+          </Routes>
+        </div>
+      </section>
+    </>
   );
 };
+
+export default App;
