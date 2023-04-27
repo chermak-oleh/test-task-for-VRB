@@ -1,31 +1,26 @@
-import React from 'react';
-import { useAppSelector } from '../../store/hooks';
-import { ArticleList } from '../../components/ArticlesList';
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { ArticleList } from '../../components/Article';
 import { SearchInput } from '../../components/SearchInput';
+import { initialArticles } from '../../initialArticles';
+import { setArticles } from '../../slice/myArticlesSlice';
+import { Article } from '../../types/Article';
+import { getVisibleArticles } from '../../utils/getVisibleArticles';
 
 export const MyArticlesPage: React.FC = () => {
   const articles = useAppSelector(state => state.articles.articles);
   const query = useAppSelector(state => state.articles.searchQuery);
   const pinnedId = useAppSelector(state => state.articles.pinnedId);
+  const dispatch = useAppDispatch();
+  const [visibleArticles, setVisibleArticles] = useState<Article[]>([]);
 
-  const pinnedArticle = articles.find(article => article.id === pinnedId);
-  const articlesWithoutPinned = articles.filter(article => article.id !== pinnedId);
+  useEffect(() => {
+    dispatch(setArticles(initialArticles));
+  }, []);
 
-  const visibleArticles = pinnedArticle
-    ? [pinnedArticle, ...articlesWithoutPinned].filter(article => {
-      const { title, description } = article;
-      const lowerTitle = title.toLowerCase();
-      const lowerDesc = description.toLowerCase();
-
-      return (lowerTitle.includes(query) || lowerDesc.includes(query));
-    })
-    : articles.filter(article => {
-      const { title, description } = article;
-      const lowerTitle = title.toLowerCase();
-      const lowerDesc = description.toLowerCase();
-
-      return (lowerTitle.includes(query) || lowerDesc.includes(query));
-    });
+  useEffect(() => {
+    setVisibleArticles(getVisibleArticles(articles, pinnedId, query));
+  }, [articles, pinnedId, query]);
 
   return (
     <>

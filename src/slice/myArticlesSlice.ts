@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Article } from '../types/Article';
-import { initialArticles } from '../initialArticles';
 /* eslint-disable no-param-reassign */
 
 export interface State {
@@ -10,7 +9,7 @@ export interface State {
 }
 
 const initialState: State = {
-  articles: initialArticles,
+  articles: [],
   pinnedId: null,
   searchQuery: '',
 };

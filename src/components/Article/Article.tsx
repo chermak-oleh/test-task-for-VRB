@@ -27,7 +27,7 @@ export const ArticleList: React.FC<Props> = ({
 
   return (
     <div className="column is-4-desktop is-6-tablet is-12-mobile">
-      <div className="box">
+      <div className="box" style={{ height: '500px', overflow: 'auto' }}>
         <img className="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/1599px-Flag_of_Ukraine.svg.png?20100406171642" alt="Slava Ukraini!" />
         <p className="is-italic">
           Author:
@@ -35,30 +35,31 @@ export const ArticleList: React.FC<Props> = ({
         </p>
         <h2 className="title">{title}</h2>
         <p className="has-text-weight-medium is-family-sans-serif">{description}</p>
-        <div className="columns is-gapless is-mobile mt-3">
-          <div className="column is-half">
-            <button
-              className={classNames(
-                'button is-info is-fullwidth is-small mr-2',
-                { 'is-success': pinnedId === id },
-              )}
-              type="button"
-              onClick={onPinButton}
-            >
-              {pinnedId === id
-                ? 'Pinned'
-                : 'Pin'}
-            </button>
-          </div>
-          <div className="column is-half">
-            <button
-              className="button is-danger is-fullwidth is-small ml-2"
-              type="button"
-              onClick={onRemoveButton}
-            >
-              Remove
-            </button>
-          </div>
+
+      </div>
+      <div className="columns is-gapless is-mobile mt-3">
+        <div className="column is-half">
+          <button
+            className={classNames(
+              'button is-info is-fullwidth is-small mr-2',
+              { 'is-success': pinnedId === id },
+            )}
+            type="button"
+            onClick={onPinButton}
+          >
+            {pinnedId === id
+              ? 'Pinned'
+              : 'Pin'}
+          </button>
+        </div>
+        <div className="column is-half">
+          <button
+            className="button is-danger is-fullwidth is-small ml-2"
+            type="button"
+            onClick={onRemoveButton}
+          >
+            Remove
+          </button>
         </div>
       </div>
     </div>
