@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { addArticle } from '../../slice/myArticlesSlice';
+import { AddArticleModal } from '../AddArticleModal';
 
 export const AddArticleForm: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -10,6 +11,7 @@ export const AddArticleForm: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const getNewId = () => (
     Math.max(
@@ -68,11 +70,20 @@ export const AddArticleForm: React.FC = () => {
 
     addNewArticle();
     clearForm();
+    setShowModal(true);
+  };
+
+  const onCloseButton = () => {
+    setShowModal(false);
   };
 
   const titleErrorCondition = !title && error;
   const authorErrorCondition = !author && error;
   const descErrorCondition = !description && error;
+
+  if (showModal) {
+    return (<AddArticleModal onCloseButton={onCloseButton} />);
+  }
 
   return (
     <>
