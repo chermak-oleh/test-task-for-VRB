@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
-import { removeArticle, setPinnedId } from '../../slice/myArticlesSlice';
+import { removeArticle, setPinnedId } from '../../slices/myArticlesSlice';
 import { useAppSelector } from '../../store/hooks';
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
   description: string;
 };
 
-export const ArticleList: React.FC<Props> = ({
+export const Article: React.FC<Props> = ({
   id, author, description, title,
 }) => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export const ArticleList: React.FC<Props> = ({
 
   return (
     <div className="column is-4-desktop is-6-tablet is-12-mobile">
-      <div className="box" style={{ height: '500px', overflow: 'auto' }}>
+      <div className="box" style={{ height: '600px', overflow: 'auto' }}>
         <img className="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/1599px-Flag_of_Ukraine.svg.png?20100406171642" alt="Slava Ukraini!" />
         <p className="is-italic">
           Author:

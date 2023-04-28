@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { searchArticles } from '../../slice/myArticlesSlice';
+import { searchArticles } from '../../slices/myArticlesSlice';
+import { useAppDispatch } from '../../store/hooks';
 
 export const SearchInput: React.FC = () => {
   const [query, setQuery] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;

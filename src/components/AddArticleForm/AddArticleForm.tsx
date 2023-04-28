@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { addArticle } from '../../slice/myArticlesSlice';
+import { addArticle } from '../../slices/myArticlesSlice';
 import { AddArticleModal } from '../AddArticleModal';
 
 export const AddArticleForm: React.FC = () => {
