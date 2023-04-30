@@ -11,7 +11,7 @@ type Props = {
   description: string;
 };
 
-export const Article: React.FC<Props> = ({
+export const Article: React.FC<Props> = React.memo(({
   id, author, description, title,
 }) => {
   const dispatch = useDispatch();
@@ -64,4 +64,4 @@ export const Article: React.FC<Props> = ({
       </div>
     </div>
   );
-};
+});

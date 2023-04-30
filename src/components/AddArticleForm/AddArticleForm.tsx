@@ -13,11 +13,15 @@ export const AddArticleForm: React.FC = () => {
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const getNewId = () => (
-    Math.max(
+  const getNewId = () => {
+    const newId = Math.max(
       ...articles.map(article => article.id),
-    ) + 1
-  );
+    ) + 1;
+
+    return newId === -Infinity
+      ? 0
+      : newId;
+  };
 
   const addNewArticle = () => {
     const trimmedAuthor = author.trim();

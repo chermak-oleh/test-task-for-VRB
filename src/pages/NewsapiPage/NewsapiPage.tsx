@@ -4,8 +4,10 @@ import {
   increasePage, loadArticlesAsync, resetPage, setTopic,
 } from '../../slices/apiArticlesSlice';
 import { ApiArticle } from '../../components/ApiArticle';
+import { Topic } from '../../types/Topic';
+import { ChangeTopicModal } from '../../components/ChangeTopicModal';
 
-export const NewsapiPage: React.FC = () => {
+export const NewsapiPage: React.FC = React.memo(() => {
   const dispatch = useAppDispatch();
   const page = useAppSelector(state => state.apiArticles.page);
   const topic = useAppSelector(state => state.apiArticles.topic);
@@ -45,20 +47,7 @@ export const NewsapiPage: React.FC = () => {
 
   if (showModal) {
     return (
-      <div className="modal is-active">
-        <div className="modal-background"></div>
-        <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">Something went wrong</p>
-            <button className="delete" aria-label="close" type="button" onClick={onCloseButton}></button>
-          </header>
-          <section className="modal-card-body">
-            <h1 className="">Due to newsapi pricing policy, this is all we can offer you. But you can change the topic and try again</h1>
-          </section>
-          <footer className="modal-card-foot">
-          </footer>
-        </div>
-      </div>
+      <ChangeTopicModal onCloseButton={onCloseButton} />
     );
   }
 
@@ -70,10 +59,10 @@ export const NewsapiPage: React.FC = () => {
 
       <div className="select is-info ml-6">
         <select value={topic} onChange={handleSelectChange}>
-          <option value="ukraine">Ukraine</option>
-          <option value="apple">Apple</option>
-          <option value="bitcoin">Bitcoin</option>
-          <option value="world">World</option>
+          <option value={Topic.Ukraine}>Ukraine</option>
+          <option value={Topic.Apple}>Apple</option>
+          <option value={Topic.Bitcoin}>Bitcoin</option>
+          <option value={Topic.World}>World</option>
         </select>
       </div>
 
@@ -99,4 +88,4 @@ export const NewsapiPage: React.FC = () => {
       </div>
     </>
   );
-};
+});
