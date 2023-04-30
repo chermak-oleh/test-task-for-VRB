@@ -16,6 +16,7 @@ export const ChangeTopicModal: React.FC<Props> = React.memo(({ onCloseButton }) 
         <h1 className="title">Due to newsapi pricing policy, this is all we can offer you. But you can change the topic</h1>
       </section>
       <footer className="modal-card-foot">
+        <button className="button is-danger" type="button" onClick={onCloseButton}>Close</button>
       </footer>
     </div>
   </div>
