@@ -16,6 +16,7 @@ export const AddArticleModal: React.FC<Props> = React.memo(({ onCloseButton }) =
         <h1 className="title has-text-success">Article added successfully</h1>
       </section>
       <footer className="modal-card-foot">
+        <button className="button is-success" type="button" onClick={onCloseButton}>Close</button>
       </footer>
     </div>
   </div>
