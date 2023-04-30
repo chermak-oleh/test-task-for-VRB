@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { searchArticles } from '../../slices/myArticlesSlice';
 import { useAppDispatch } from '../../store/hooks';
 
-export const SearchInput: React.FC = () => {
+export const SearchInput: React.FC = React.memo(() => {
   const [query, setQuery] = useState('');
   const dispatch = useAppDispatch();
 
@@ -27,4 +27,4 @@ export const SearchInput: React.FC = () => {
       </div>
     </div>
   );
-};
+});

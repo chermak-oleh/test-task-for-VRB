@@ -5,19 +5,22 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getApiArticles } from '../api/getApiArticles';
 import { RootState } from '../store/store';
 import { ApiArticle } from '../types/ApiArticle';
+import { ResponseObj } from '../types/ResponseObj';
+import { Status } from '../types/Status';
+import { Topic } from '../types/Topic';
 
 export interface State {
   apiArticles: ApiArticle[];
   page: number;
-  topic: string;
-  status: 'loading' | 'succeeded' | 'failed';
+  topic: Topic;
+  status: Status;
 }
 
 const initialState: State = {
   apiArticles: [],
   page: 1,
-  topic: 'ukraine',
-  status: 'loading',
+  topic: Topic.Ukraine,
+  status: Status.Loading,
 };
 
 type Info = {
@@ -29,7 +32,7 @@ export const loadArticlesAsync = createAsyncThunk(
   'articles/fetchArticles',
   async (info: Info) => {
     const { page, topic } = info;
-    const loadedArticles: ApiArticle[] = await getApiArticles(page, topic);
+    const loadedArticles: ResponseObj = await getApiArticles(page, topic);
 
     return loadedArticles;
   },
@@ -52,14 +55,14 @@ export const apiArticlesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loadArticlesAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = Status.Loading;
       })
       .addCase(loadArticlesAsync.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = Status.Succeeded;
         state.apiArticles = action.payload.articles;
       })
       .addCase(loadArticlesAsync.rejected, (state) => {
-        state.status = 'failed';
+        state.status = Status.Failed;
       });
   },
 });

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../store/hooks';
-import { Article as ArticleCard } from '../../components/Article';
+import { Article as ArticleCard } from '../../components/ArticleCard';
 import { SearchInput } from '../../components/SearchInput';
 import { Article } from '../../types/Article';
 import { getVisibleArticles } from '../../utils/getVisibleArticles';
 
-export const MyArticlesPage: React.FC = () => {
+export const MyArticlesPage: React.FC = React.memo(() => {
   const articles = useAppSelector(state => state.articles.articles);
   const query = useAppSelector(state => state.articles.searchQuery);
   const pinnedId = useAppSelector(state => state.articles.pinnedId);
@@ -55,4 +55,4 @@ export const MyArticlesPage: React.FC = () => {
       </div>
     </>
   );
-};
+});
